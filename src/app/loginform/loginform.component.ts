@@ -72,7 +72,8 @@ export class LoginformComponent {
       var check : boolean = risposta as boolean;
       if(check){
         if(token?.split("-")[0] == "STUDENTE"){
-          alert("Sei uno studente")
+          //Pagina areastudenti
+          window.location.href = "/areastudenti"
         }
         else if(token?.split("-")[0] == "DOCENTE"){
           alert("Sei un docente")
