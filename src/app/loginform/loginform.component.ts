@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginStatus } from 'src/models/LoginStatus';
@@ -17,6 +17,8 @@ export class LoginformComponent {
       username: "",
       password: ""
     })
+
+    this.checkLogin();
   }
 
   submitForm(){
@@ -30,6 +32,7 @@ export class LoginformComponent {
 
       if(loginStatus.ruolo == "STUDENTE"){
         //Pagina areastudenti
+        window.location.href = "/areastudenti"
       }
       else if(loginStatus.ruolo == "DOCENTE"){
         //Pagina areadocenti
@@ -47,6 +50,37 @@ export class LoginformComponent {
         )
       }
 
+    })
+  }
+
+
+  checkLogin(){
+    var token = sessionStorage.getItem("token")
+
+    if(token == null){
+      token = "";
+    }
+
+    const headers = new HttpHeaders(
+      {
+        'Content-Type' : 'application/json',
+        'token': token as string
+      }
+    );
+
+    this.http.get("http://localhost:8080/api/login/checklogin", {headers}).subscribe(risposta =>{
+      var check : boolean = risposta as boolean;
+      if(check){
+        if(token?.split("-")[0] == "STUDENTE"){
+          alert("Sei uno studente")
+        }
+        else if(token?.split("-")[0] == "DOCENTE"){
+          alert("Sei un docente")
+        }
+        else if(token?.split("-")[0] == "DIRIGENTE"){
+          alert("Sei un dirigente")
+        }
+      }
     })
   }
 }
