@@ -15,7 +15,7 @@
             <td>{{studente.cognome}}</td>
             <td>{{studente.dataNascita}}</td>
             <td><button>MODIFICA</button></td>
-            <td><button>ELIMINA</button></td>
+            <td><button (click)="eliminaStudente(studente.id)">ELIMINA</button></td>
         </tr>
     </tbody>
 </table>
