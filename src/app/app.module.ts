@@ -8,6 +8,8 @@ import { LoginformComponent } from './loginform/loginform.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AreastudentiComponent } from './areastudenti/areastudenti.component';
+import { AreadirigentiComponent } from './areadirigenti/areadirigenti.component';
+import { TabellaStudentiComponent } from './tabella-studenti/tabella-studenti.component';
 
 const routes : Routes = [
   {
@@ -20,6 +22,11 @@ const routes : Routes = [
     path: 'areastudenti',
     component: AreastudentiComponent
   },
+  {
+    //http://localhost:4200/areadirigenti
+    path: 'areadirigenti',
+    component: AreadirigentiComponent
+  },
 ]
 
 
@@ -28,6 +35,8 @@ const routes : Routes = [
     AppComponent,
     LoginformComponent,
     AreastudentiComponent,
+    AreadirigentiComponent,
+    TabellaStudentiComponent,
   ],
   imports: [
     BrowserModule,

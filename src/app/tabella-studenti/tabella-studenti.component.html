@@ -1,0 +1,21 @@
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Data nascita</th>
+        <th>MODIFICA</th>
+        <th>ELIMINA</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let studente of studenti">
+            <td>{{studente.id}}</td>
+            <td>{{studente.nome}}</td>
+            <td>{{studente.cognome}}</td>
+            <td>{{studente.dataNascita}}</td>
+            <td><button>MODIFICA</button></td>
+            <td><button>ELIMINA</button></td>
+        </tr>
+    </tbody>
+</table>

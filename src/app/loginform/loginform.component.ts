@@ -39,6 +39,7 @@ export class LoginformComponent {
       }
       else if(loginStatus.ruolo == "DIRIGENTE"){
         //Pagina areadirigenti
+        window.location.href = "/areadirigenti"
       }
       else{
         alert("ERRORE LOGIN");
@@ -79,7 +80,7 @@ export class LoginformComponent {
           alert("Sei un docente")
         }
         else if(token?.split("-")[0] == "DIRIGENTE"){
-          alert("Sei un dirigente")
+          window.location.href = "/areadirigenti"
         }
       }
     })
