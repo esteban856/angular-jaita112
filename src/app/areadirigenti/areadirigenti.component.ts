@@ -19,9 +19,27 @@ export class AreadirigentiComponent {
     this.checkLogin();
     this.getDirigente();
     this.getAllStudenti();
+    this.getAllClassi();
   }
 
+  getAllClassi(){
+    var token = sessionStorage.getItem("token")
 
+    if(token == null){
+      token = "";
+    }
+
+    const headers = new HttpHeaders(
+      {
+        'Content-Type' : 'application/json',
+        'token': token as string
+      }
+    );
+
+    this.http.get("http://localhost:8080/api/classe/classe-all", {headers}).subscribe(risposta =>{
+      this.classi = risposta as Classe[]
+    })
+  }
 
   getAllStudenti(){
     var token = sessionStorage.getItem("token")
