@@ -1,5 +1,6 @@
 
 <div *ngIf="isModifing" class="modal">
+    <h4>Modifica studente</h4>
     <button (click)="annullaModifica()" class="bottone-chiusura">CHIUDI</button>
     <form [formGroup]="formModificaStudente" (ngSubmit)="submitModificaStudente()">
         <input type="hidden" name="id" formControlName="id">
@@ -13,6 +14,41 @@
     
         <label for="dataNascita">Data nascita:</label>
         <input type="date" name="dataNascita" formControlName="dataNascita">
+        <br>
+    
+        <label for="classe">Classe studente:</label>
+        <select name="classe" formControlName="classe">
+            <option *ngFor="let classe of classi" [value]="classe.id">{{classe.sezione}}</option>
+        </select>
+        <br>
+        <input type="submit">
+    
+    </form>
+</div>
+
+<div *ngIf="isInserting" class="modal">
+    <h4>Nuovo studente</h4>
+    <button (click)="annullaInserisci()" class="bottone-chiusura">CHIUDI</button>
+    <form [formGroup]="formInserisciStudente" (ngSubmit)="submitInserisciStudente()">
+        
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" formControlName="nome">
+        <br>
+    
+        <label for="cognome">Cognome:</label>
+        <input type="text" name="cognome" formControlName="cognome">
+        <br>
+    
+        <label for="dataNascita">Data nascita:</label>
+        <input type="date" name="dataNascita" formControlName="dataNascita">
+        <br>
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" formControlName="username">
+        <br>
+    
+        <label for="password">Password:</label>
+        <input type="text" name="password" formControlName="password">
         <br>
     
         <label for="classe">Classe studente:</label>
@@ -47,3 +83,4 @@
         </tr>
     </tbody>
 </table>
+<button (click)="inserisciStudente()">Inserisci nuovo studente</button>

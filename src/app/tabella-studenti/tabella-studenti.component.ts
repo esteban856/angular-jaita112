@@ -14,8 +14,11 @@ export class TabellaStudentiComponent {
   @Input() classi? : Classe[]
 
   formModificaStudente : FormGroup;
+  formInserisciStudente : FormGroup;
+
 
   isModifing = false;
+  isInserting = false;
 
   constructor(private http : HttpClient, private formBuilder : FormBuilder){
     this.http = http;
@@ -28,8 +31,23 @@ export class TabellaStudentiComponent {
         classe : ""
       }
     )
+
+    this.formInserisciStudente = formBuilder.group(
+      {
+        nome : "", 
+        cognome : "",
+        dataNascita : "",
+        username : "", 
+        password : "",
+        classe : ""
+      }
+    )
   }
 
+  inserisciStudente(){
+    this.isInserting = true;
+    this.isModifing = false;
+  }
 
   eliminaStudente(id : number){
     var token = sessionStorage.getItem("token")
@@ -72,6 +90,7 @@ export class TabellaStudentiComponent {
       }
     );
     this.isModifing = true;
+    this.isInserting = false;
   }
 
   annullaModifica(){
@@ -85,6 +104,47 @@ export class TabellaStudentiComponent {
         classe : ""
       }
     );
+  }
+
+  annullaInserisci(){
+    this.isInserting = false;
+    this.formInserisciStudente.patchValue(
+      {
+        nome : "", 
+        cognome : "",
+        dataNascita : "",
+        username : "", 
+        password : "",
+        classe : ""
+      }
+    )
+  }
+
+
+  submitInserisciStudente(){
+    var token = sessionStorage.getItem("token")
+    if(token == null){
+      token = "";
+    }
+
+    const formValues = this.formInserisciStudente.value;
+    const headers = new HttpHeaders(
+      {
+        'Content-Type' : 'application/json',
+        'token': token as string
+      }
+    );
+
+    const body = JSON.stringify(formValues);
+
+    this.http.post("http://localhost:8080/api/persona/studente-insert", body, {headers}).subscribe(risposta =>{
+      var check = risposta as boolean;
+      if(check){
+        window.location.href = "/areadirigenti";
+      }
+    })
+
+    this.isInserting = false;
   }
 
 
